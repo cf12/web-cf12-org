@@ -25,31 +25,11 @@
     margin: 0;
   }
 
-  .header {
-    @include textShadow;
-
-    position: absolute;
-    top: 60px;
-
-    font-size: 24px;
-    font-family: 'Consolas', sans-serif;
-    font-weight: normal;
-
-    text-decoration: none;
-    color: white;
-
-    margin: 0;
-
-    transition: all 100ms ease;
-
-    &:hover {
-      cursor: pointer;
-      transform: scale(1.1);
-    }
-  }
 
   .disabled {
     background-color: rgba(white, 0.5);
+
+    transition: all 100ms ease;
 
     &:hover {
       cursor: not-allowed;

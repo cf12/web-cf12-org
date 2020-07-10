@@ -3,10 +3,9 @@ import { FaArrowRight, FaTimesCircle, FaCheckCircle } from 'react-icons/fa'
 import { BeatLoader } from 'react-spinners'
 import now from 'performance-now'
 
-import Link from '../components/Link'
+import Layout from 'components/Layout'
 
 import styles from './up.scss'
-import colors from 'theme/_colors.scss'
 
 const Up = () => {
   const inputRef = useRef()
@@ -64,19 +63,16 @@ const Up = () => {
   }
 
   return (
-    <div
+    <Layout
       className={styles.body}
       style={{
         backgroundColor: bg
       }}
+      seo={{
+        title: 'Uptime checker - web.cf12.org',
+        description: 'A web app that checks for host uptime using both client and server fetch methods and address resolution'
+      }}
     >
-      <Link
-        href='/'
-        className={styles.header}
-      >
-        web.cf12.org
-      </Link>
-
       <h1>Uptime Checker</h1>
       <p>isitdownrightnow.com but better</p>
 
@@ -127,7 +123,7 @@ const Up = () => {
 
         </div>
       </> }
-    </div>
+    </Layout>
   )
 }
 

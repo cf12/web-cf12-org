@@ -1,0 +1,42 @@
+@import 'theme/theme';
+
+.header {
+  @include flexCenter;
+  @include textShadow;
+
+  position: absolute;
+  top: 60px;
+
+  &:hover {
+    cursor: pointer;
+    // transform: scale(0.95);
+
+    & > svg {
+      margin-right: 16px;
+    }
+
+    & > a {
+      margin-right: 20px;
+    }
+  }
+
+  & > * {
+    transition: all 200ms ease;
+  }
+
+  & > svg {
+    filter: drop-shadow(2px 2px 4px rgba(black, 0.25));
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+
+  & > a {
+    font-size: 24px;
+    font-family: 'Consolas', sans-serif;
+    font-weight: normal;
+
+    text-decoration: none;
+    color: white;
+  }
+}

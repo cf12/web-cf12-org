@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch';
 import * as icons from 'react-icons/fa'
 
-import Meta from '../components/meta'
-import Footer from '../components/footer'
-
+import Layout from 'components/Layout'
 
 import styles from './ip.scss'
 
@@ -24,72 +22,73 @@ const Entry = (props) => {
   )
 }
 
-class Ip extends React.Component {
-  constructor (props) {
-    super(props)
+const Ip = () => {
+  const [ data, setData ] = useState()
 
-    this.state = {}
-
+  useEffect(() => {
     fetch('/api/ip')
       .then(res => res.json())
       .then(data => {
-        this.setState({
+        setData({
           ip: data.ip,
           hostname: data.hostname,
           isp: data.isp,
           country: data.location.country
         })
       })
-  }
+  }, [])
 
-  render () {
-    return (
-      <div className={styles.body}>
-        <Meta title='IP - cf12.org' />
+  if (!data)
+    return null
 
-        <div className={styles.ip}>
-          <h1>Your IPv4 Address is:</h1>
-          <h3>{this.state.ip}</h3>
-        </div>
-
-        <div className={styles.info}>
-          <div className={styles.left}>
-            <Entry
-              icon='FaWifi'
-              title='IPv4 Address'
-              value={this.state.ip}
-            />
-            <Entry
-              icon='FaWifi'
-              title='IPv6 Address'
-              value='(WIP)'
-            />
-            <Entry
-              icon='FaGlobe'
-              title='Hostname'
-              value={this.state.hostname}
-            />
-            <Entry
-              icon='FaGlobe'
-              title='ISP'
-              value={this.state.isp}
-            />
-            <Entry
-              icon='FaGlobe'
-              title='Country'
-              value={this.state.country}
-            />
-          </div>
-
-          <div className={styles.right}>
-
-          </div>
-        </div>
-
-        <Footer />
+  return (
+    <Layout
+      className={styles.body}
+      seo={{
+        title: 'IP Information - web.cf12.org',
+        description: 'Shows your IP information'
+      }}
+    >
+      <div className={styles.ip}>
+        <h1>Your IPv4 Address is:</h1>
+        <p>{data.ip}</p>
       </div>
-    )
-  }
+
+      <div className={styles.info}>
+        <div className={styles.left}>
+          <Entry
+            icon='FaSignal'
+            title='IPv4 Address'
+            value={data.ip}
+          />
+          <Entry
+            icon='FaSignal'
+            title='IPv6 Address'
+            value='(WIP)'
+          />
+          <Entry
+            icon='FaServer'
+            title='Hostname'
+            value={data.hostname}
+          />
+          <Entry
+            icon='FaGlobeAmericas'
+            title='Country'
+            value={data.country}
+          />
+          <Entry
+            icon='FaBuilding'
+            title='Internet Service Provider (ISP)'
+            value={data.isp}
+          />
+        </div>
+
+        <div className={styles.right}>
+
+        </div>
+      </div>
+    </Layout>
+  )
 }
 
 export default Ip

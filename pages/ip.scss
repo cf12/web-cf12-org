@@ -12,7 +12,7 @@
   flex-direction: column;
 
   & > .ip {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
 
@@ -27,15 +27,18 @@
       font-size: 72px;
     }
 
-    & > h3 {
-      padding: 10px 20px;
+    & > p {
+      display: inline-block;
       background: linear-gradient(90deg, #42D2FF 0%, #9E63FF 100%);
 
-      display: inline-block;
+      border-radius: 5px;
+
       text-align: center;
 
       font-family: 'Consolas', sans-serif;
       font-size: 32px;
+
+      padding: 10px;
     }
   }
 
@@ -51,11 +54,37 @@
 }
 
 .entry {
-  display: flex;
-  flex-direction: row;
+  @include flexRow;
+
   align-items: center;
 
+  & > svg {
+    width: 32px;
+    height: 32px;
+
+    margin-right: 16px;
+  }
+
   & > div {
+    margin: 12px 0;
+
+    & > h5 {
+      color: #A0A0A0;
+      font-family: 'Rubik', sans-serif;
+      font-weight: normal;
+
+      margin: 0;
+      margin-bottom: 5px;
+    }
+
+    & > p {
+      color: #67D1FF;
+      font-family: 'Consolas', sans-serif;
+
+      height: 18px;
+
+      margin: 0;
+    }
 
   }
 }

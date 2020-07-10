@@ -1,0 +1,16 @@
+$primary: rgb(226, 147, 57);
+
+$background: #232323;
+
+$green: #3DF23A;
+$red: #F34C4C;
+$orange: #EFC24E;
+
+:export {
+  primary: $primary;
+
+  background: $background;
+
+  green: $green;
+  orange: $orange;
+}

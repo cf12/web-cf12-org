@@ -1,0 +1,61 @@
+@import '../theme/theme';
+
+.body {
+  background-color: $background;
+  min-height: 100vh;
+
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & > .ip {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: 100vh;
+
+    & > h1 {
+      margin: 0;
+      margin-bottom: 12px;
+
+      font-family: 'Rubik', sans-serif;
+      font-weight: 500;
+      font-size: 72px;
+    }
+
+    & > h3 {
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #42D2FF 0%, #9E63FF 100%);
+
+      display: inline-block;
+      text-align: center;
+
+      font-family: 'Consolas', sans-serif;
+      font-size: 32px;
+    }
+  }
+
+  & > .info {
+    width: 800px;
+    height: 400px;
+
+    & > .left {
+      width: 50%;
+      height: 100%;
+    }
+  }
+}
+
+.entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & > div {
+
+  }
+}

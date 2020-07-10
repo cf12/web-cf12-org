@@ -1,0 +1,56 @@
+@import '../theme/theme';
+
+.body {
+  @include flexCenterCol;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: #8B6FFC;
+
+  .header {
+    @include textShadow;
+
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: white;
+
+    & > h1 {
+      font-size: 84px;
+      margin: 0;
+      margin-bottom: 16px;
+    }
+
+    & > p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    margin-bottom: 72px;
+  }
+
+  .buttons {
+    @include flexCenterRow;
+
+    & > a {
+      @include flexCenter;
+
+      width: 400px;
+      height: 250px;
+
+      background: rgba(black, 0.35);
+      box-shadow: inset 2px 2px 5px rgba(black, 0.15);
+
+      text-decoration: none;
+
+      margin: 0 32px;
+
+      & > h2 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 32px;
+
+        color: white;
+      }
+    }
+  }
+}

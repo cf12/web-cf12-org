@@ -4,6 +4,8 @@
   @include flexCenter;
   @include textShadow;
 
+  z-index: 100;
+
   position: absolute;
   top: 60px;
 

@@ -27,7 +27,7 @@ const Up = () => {
 
     try {
       const fetchStart = now()
-      const fetchRes = await fetch('http://' + url, {
+      const fetchRes = await fetch('https://' + url, {
         mode: 'no-cors',
         referrerPolicy: 'no-referrer'
       })

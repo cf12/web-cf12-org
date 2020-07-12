@@ -5,8 +5,6 @@ import Link from '../components/Link'
 import styles from './index.scss'
 
 const Home = () => {
-
-
   return (
     <div className={styles.body}>
       <div className={styles.header}>

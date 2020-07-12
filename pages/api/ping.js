@@ -27,7 +27,7 @@ export default async function handle (req, res) {
         throw new Error()
 
       const fetchStart = now()
-      const fetchRes = await fetch(`http://${ip}`, {
+      const fetchRes = await fetch(`https://${ip}`, {
         timeout: 5000,
         mode: 'no-cors',
         referrerPolicy: 'no-referrer'

@@ -12,6 +12,8 @@
   flex-direction: column;
 
   & > .ip {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,15 +42,51 @@
 
       padding: 10px;
     }
+
+    & > .indicator {
+      @include flexCenterCol;
+
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      color: rgba(white, 0.6);
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      & > p {
+        font-family: 'Rubik', sans-serif;
+
+        margin: 0;
+        margin-bottom: 14px;
+      }
+    }
   }
 
   & > .info {
-    width: 800px;
-    height: 400px;
+    @include flexCenterRow;
+
+    width: 1000px;
+    height: 300px;
+
+    margin: 200px 0;
 
     & > .left {
+      margin-right: 48px;
       width: 50%;
       height: 100%;
+
+      &:hover {
+        cursor: grab;
+      }
+    }
+
+    & > .right {
+      width: 50%;
     }
   }
 }

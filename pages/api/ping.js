@@ -1,5 +1,5 @@
 const url = require('url')
-const ping = require('ping')
+const dns = require('dns')
 const ipValidator = require('is-my-ip-valid')
 const validUrl = require('valid-url')
 const fetch = require('node-fetch')
@@ -15,38 +15,6 @@ export default async function handle (req, res) {
     return
   }
 
-  let toRet = {
-    success: false,
-    icmp: {
-      alive: null,
-      duration: null,
-      host: null,
-      ip: null
-    },
-    fetch: {
-      status: null,
-      duration: null
-    }
-  }
-
-  try {
-    const icmpRes = await ping.promise.probe(reqUrl, {
-      timeout: 5
-    })
-
-    console.log(icmpRes)
-
-    if (icmpRes.alive) {
-      toRet.success = true
-      toRet.icmp = {
-        alive: icmpRes.alive,
-        duration: icmpRes.avg,
-        host: icmpRes.host,
-        ip: icmpRes.numeric_host
-      }
-    }
-  } catch (err) { }
-
   try {
     const fetchStart = now()
     const fetchRes = await fetch(`https://${reqUrl}`, {
@@ -55,12 +23,21 @@ export default async function handle (req, res) {
       referrerPolicy: 'no-referrer'
     })
 
-    toRet.success = true
-    toRet.fetch = {
+    let toRet = {
+      success: true,
       status: fetchRes.status,
       duration: (now() - fetchStart).toFixed(2)
     }
-  } catch (err) { }
 
-  res.json(toRet)
+    dns.resolve(reqUrl, (err, addrs) => {
+      if (!err && addrs.length)
+        toRet.ip = addrs[0]
+
+      res.json(toRet)
+    })
+  } catch (err) {
+    res.json({
+      success: false
+    })
+  }
 }

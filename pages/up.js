@@ -33,16 +33,11 @@ const Up = () => {
 
       setClientData({
         success: true,
-        fetch: {
-          duration: (now() - fetchStart).toFixed(2)
-        }
+        duration: (now() - fetchStart).toFixed(2)
       })
     } catch (err) {
       setClientData({
         success: false,
-        fetch: {
-          duration: null
-        }
       })
     }
 
@@ -98,7 +93,7 @@ const Up = () => {
               <h2>Client Side Connection</h2>
             </span>
 
-            <p><b>Fetch Ping: </b>{clientData.fetch.duration ? clientData.fetch.duration + 'ms' : '[None]'}</p>
+            <p><b>Fetch Ping: </b>{clientData.duration ? clientData.duration + 'ms' : '[None]'}</p>
           </div>
 
           <div className={styles.right}>
@@ -110,10 +105,9 @@ const Up = () => {
               <h2>Server Side Connection</h2>
             </span>
 
-            <p><b>ICMP Ping: </b>{serverData.icmp.duration ? serverData.icmp.duration + 'ms' : '[None]'}</p>
-            <p><b>Fetch Ping: </b>{serverData.fetch.duration ? serverData.fetch.duration + 'ms' : '[None]'}</p>
-            <p><b>Status: </b>{serverData.fetch.status || '[None]'}</p>
-            <p><b>IP Resolved: </b>{serverData.icmp.ip || '[None]'}</p>
+            <p><b>Fetch Ping: </b>{serverData.duration ? serverData.duration + 'ms' : '[None]'}</p>
+            <p><b>Status: </b>{serverData.status || '[None]'}</p>
+            <p><b>IP Resolved: </b>{serverData.ip || '[None]'}</p>
           </div>
         </div>
       </> : null }

@@ -15,55 +15,52 @@ export default async function handle (req, res) {
     return
   }
 
+  let toRet = {
+    success: false,
+    icmp: {
+      alive: null,
+      duration: null,
+      host: null,
+      ip: null
+    },
+    fetch: {
+      status: null,
+      duration: null
+    }
+  }
+
   try {
-    const icmpData = await ping.promise.probe(reqUrl, {
+    const icmpRes = await ping.promise.probe(reqUrl, {
       timeout: 5
     })
 
-    const ip = icmpData.numeric_host
+    console.log(icmpRes)
 
-    try {
-      if (!ip)
-        throw new Error()
-
-      const fetchStart = now()
-      const fetchRes = await fetch(`https://${ip}`, {
-        timeout: 5000,
-        mode: 'no-cors',
-        referrerPolicy: 'no-referrer'
-      })
-      const fetchEnd = now()
-
-      res.json({
-        success: true,
-        icmp: {
-          alive: icmpData.alive,
-          duration: icmpData.avg,
-          host: icmpData.host,
-          ip: icmpData.numeric_host
-        },
-        fetch: {
-          status: fetchRes.status,
-          duration: (fetchEnd - fetchStart).toFixed(2)
-        }
-      })
-    } catch (err) {
-      res.json({
-        success: false,
-        icmp: {
-          alive: icmpData.alive,
-          duration: icmpData.avg,
-          host: icmpData.host,
-          ip: icmpData.numeric_host
-        },
-        fetch: {
-          status: null,
-          duration: null
-        }
-      })
+    if (icmpRes.alive) {
+      toRet.success = true
+      toRet.icmp = {
+        alive: icmpRes.alive,
+        duration: icmpRes.avg,
+        host: icmpRes.host,
+        ip: icmpRes.numeric_host
+      }
     }
-  } catch (err) {
-    res.json({ error: 'An unexpected error has occurred' })
-    return
-  }
+  } catch (err) { }
+
+  try {
+    const fetchStart = now()
+    const fetchRes = await fetch(`https://${reqUrl}`, {
+      timeout: 5000,
+      mode: 'no-cors',
+      referrerPolicy: 'no-referrer'
+    })
+
+    toRet.success = true
+    toRet.fetch = {
+      status: fetchRes.status,
+      duration: (now() - fetchStart).toFixed(2)
+    }
+  } catch (err) { }
+
+  res.json(toRet)
 }

@@ -24,19 +24,17 @@ const Up = () => {
       .then(res => res.json())
       .then(data => setServerData(data))
 
-
     try {
       const fetchStart = now()
       const fetchRes = await fetch('https://' + url, {
         mode: 'no-cors',
         referrerPolicy: 'no-referrer'
       })
-      const fetchEnd = now()
 
       setClientData({
         success: true,
         fetch: {
-          duration: (fetchEnd - fetchStart).toFixed(2)
+          duration: (now() - fetchStart).toFixed(2)
         }
       })
     } catch (err) {
@@ -74,7 +72,7 @@ const Up = () => {
       }}
     >
       <h1>Uptime Checker</h1>
-      <p>isitdownrightnow.com but better</p>
+      <p>For all your uptime checking needs</p>
 
       <form className={styles.input} onSubmit={handleSubmit}>
         <input
@@ -100,7 +98,7 @@ const Up = () => {
               <h2>Client Side Connection</h2>
             </span>
 
-            <p><b>Fetch Ping: </b>{clientData.fetch.duration}ms</p>
+            <p><b>Fetch Ping: </b>{clientData.fetch.duration ? clientData.fetch.duration + 'ms' : '[None]'}</p>
           </div>
 
           <div className={styles.right}>
@@ -112,17 +110,13 @@ const Up = () => {
               <h2>Server Side Connection</h2>
             </span>
 
-            <p><b>ICMP Ping: </b>{serverData.icmp.duration}ms</p>
-            <p><b>Fetch Ping: </b>{serverData.fetch.duration}ms</p>
-            <p><b>Status: </b>{serverData.fetch.status}</p>
-            <p><b>IP Resolved: </b>{serverData.icmp.ip}</p>
+            <p><b>ICMP Ping: </b>{serverData.icmp.duration ? serverData.icmp.duration + 'ms' : '[None]'}</p>
+            <p><b>Fetch Ping: </b>{serverData.fetch.duration ? serverData.fetch.duration + 'ms' : '[None]'}</p>
+            <p><b>Status: </b>{serverData.fetch.status || '[None]'}</p>
+            <p><b>IP Resolved: </b>{serverData.icmp.ip || '[None]'}</p>
           </div>
         </div>
-      </> : <>
-        <div className={styles.desc}>
-
-        </div>
-      </> }
+      </> : null }
     </Layout>
   )
 }

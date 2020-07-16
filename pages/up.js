@@ -94,6 +94,7 @@ const Up = () => {
             </span>
 
             <p><b>Fetch Ping: </b>{clientData.duration ? clientData.duration + 'ms' : '[None]'}</p>
+            <p>*Client side connections can be affected by browser tracking prevention</p>
           </div>
 
           <div className={styles.right}>

@@ -99,6 +99,7 @@
 
   .results {
     @include flexRow;
+    position: relative;
 
     width: 1000px;
 
@@ -123,7 +124,10 @@
       & > p {
         font-family: 'Consolas', sans-serif;
 
+        line-height: 150%;
         text-shadow: none;
+
+        margin: 6px 0;
 
         & > b {
           color: white;
